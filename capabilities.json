@@ -2,47 +2,47 @@
     "dataRoles": [
                 {
                     "name": "YAxis",
-                    "kind": 0,
+                    "kind": "Grouping",
                     "displayName":"Y-Axis"
                 },
                 {
                     "name": "XAxis",
-                    "kind": 0,
+                    "kind": "Grouping",
                     "displayName":"X-Axis"
                 },
                 {
                     "name": "Values",
-                    "kind": 1,
+                    "kind": "Measure",
                     "displayName":"Values"
                 },
                 {
                     "name": "YAxisHighlight",
-                    "kind": 1,
+                    "kind": "Measure",
                     "displayName": "Y-Axis Highlight"
                 },
                 {
                     "name": "XAxisHighlight",
-                    "kind": 1,
+                    "kind": "Measure",
                     "displayName": "X-Axis Highlight"
                 },
                 {
                     "name": "OverrideDimension1",
-                    "kind": 1,
+                    "kind": "Measure",
                     "displayName": "Override Dimension 1"
                 },
                 {
                     "name": "OverrideDimension2",
-                    "kind": 1,
+                    "kind": "Measure",
                     "displayName": "Override Dimension 2"
                 },
                 {
                     "name": "BorderDimension",
-                    "kind": 1,
+                    "kind": "Measure",
                     "displayName": "Border Dimension"
                 },
                 {
                     "name": "TimelineDimension",
-                    "kind": 1,
+                    "kind": "Measure",
                     "displayName": "Timeline Dimension"
                 }
             ],

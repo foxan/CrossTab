@@ -1,4 +1,7 @@
 {
   "version": "1.0",
-  "name": "crosstab"
+  "name": "crosstab",
+  "dependencies": {
+    "d3": "^3.5.5"
+  }
 }

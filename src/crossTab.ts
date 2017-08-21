@@ -89,7 +89,7 @@ module powerbi.extensibility.visual {
         private svgDiv: d3.Selection<SVGElement>;
         private svgSize: ISvgSize = { width: 800, height: 300 };
         private mainGraphics: d3.Selection<SVGElement>;
-        private colors: IDataColorPalette;
+        private colors: IColorPalette;
         private host: IVisualHost;
         private selectionManager: ISelectionManager;
         private dataView: DataView;
@@ -147,14 +147,14 @@ module powerbi.extensibility.visual {
 
             //fill X-Axis
             for (var i:number = 0; i < dataView.categorical.categories[0].values.length; i++) {
-                catX.push({label: dataView.categorical.categories[0].values[i], highlight: null});
+                catX.push({label: dataView.categorical.categories[0].values[i].toString(), highlight: null});
             }
 
             //fill Y-Axis
             for (var i:number = 0; i < dataView.categorical.values.length; i++) {
                 if (dataView.categorical.values[i].source && dataView.categorical.values[i].source.roles && dataView.categorical.values[i].source.roles['Values']) {
                     //we are in a 'Values' object
-                    var yAxis:string = dataView.categorical.values[i].source.groupName;
+                    var yAxis:string = dataView.categorical.values[i].source.groupName.toString();
                     var xTotal:number = 0;
 
                     //add Y Category
@@ -273,14 +273,15 @@ module powerbi.extensibility.visual {
                 //we are in a 'YAxisHighlight' object
                 for (var y:number = 0; y < catY.length; y++) {
                   if (dataView.categorical.values[i].source.groupName === catY[y].label) {
-                    catY[y].highlight = dataView.categorical.values[i].values.reduce(function(a, b) { return a + b; }) / dataView.categorical.values[i].values.length;
+                      var v:number = parseInt(dataView.categorical.values[i].values.toString());
+                    catY[y].highlight = <number>dataView.categorical.values[i].values.reduce(function(a:number, b:number) { return a + b; }); // dataView.categorical.values[i].values.length;
                   }
                 }
               }
               else if (dataView.categorical.values[i].source && dataView.categorical.values[i].source.roles && dataView.categorical.values[i].source.roles['XAxisHighlight']) {
                 //we are in a 'XAxisHighlight' object
                 for (var x:number = 0; x < dataView.categorical.values[i].values.length; x++) {
-                  catX[x].highlight = dataView.categorical.values[i].values[x];
+                  catX[x].highlight = <number>dataView.categorical.values[i].values[x];
                 }
               }
             }
@@ -297,13 +298,13 @@ module powerbi.extensibility.visual {
                   var yTotal:number = 0;
                   for (var i:number = 0; i < dataView.categorical.values.length; i++) {
                     if (dataView.categorical.values[i].source.displayName === "TaskPercentComplete") {
-                        yTotal += dataView.categorical.values[i].values[n];
+                        yTotal += <number>dataView.categorical.values[i].values[n];
                       }
                   }
 
                   dataPoints.push({
-                      categoryY: totalYTitle,
-                      categoryX: dataView.categorical.categories[0].values[n],
+                      categoryY: <string>totalYTitle,
+                      categoryX: <string>dataView.categorical.categories[0].values[n],
                       overrideDimension1:false,
                       overrideDimension2:false,
                       borderDimension:false,
@@ -334,6 +335,8 @@ module powerbi.extensibility.visual {
 
        constructor(options: VisualConstructorOptions) {
 
+           debugger;
+
             this.host = options.host;
 
             this.svgSize.height = options.element.clientHeight;
@@ -356,6 +359,7 @@ module powerbi.extensibility.visual {
         }
 
         public update(options: VisualUpdateOptions): void {
+            debugger;
             if (!options.dataViews || !options.dataViews[0]) return;
             this.svg.selectAll("*").remove();
             this.mainGraphics = this.svg;
@@ -367,7 +371,7 @@ module powerbi.extensibility.visual {
         }
 
         private updateInternal(options: VisualUpdateOptions): void {
-
+            debugger;
             var dataView = this.dataView = options.dataViews[0];
             var showTotals = this.getShowTotals(options.dataViews[0]);
             var totalXTitle = this.totalXTitle = this.getTotalXTitle(dataView);
@@ -790,7 +794,7 @@ module powerbi.extensibility.visual {
                     if (general) {
                         for (var i = 0; i <= 10; i++) {
                            if (general['color' + i] && general['color' + i + 'Val']) {
-                                this.dicColor[general['color' + i + 'Val']] = general['color' + i];
+                                this.dicColor[<string>general['color' + i + 'Val']] = general['color' + i];
                            }
                         }
                     }
@@ -805,7 +809,7 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['color' + colorNum]) {
-                           return general['color' + colorNum];
+                           return <string>general['color' + colorNum];
                        }
                     }
                 }
@@ -820,7 +824,8 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['totalsColor']) {
-                           return general['totalsColor'].solid.color;
+                           //return general['totalsColor'].solid.color;
+                           return <string>general['totalsColor'];
                        }
                     }
                 }
@@ -835,7 +840,8 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['overrideDimension1Color']) {
-                           return general['overrideDimension1Color'].solid.color;
+                           //return general['overrideDimension1Color'].solid.color;
+                           return <string>general['overrideDimension1Color'];
                        }
                     }
                 }
@@ -850,7 +856,8 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['overrideDimension2Color']) {
-                           return general['overrideDimension2Color'].solid.color;
+                           //return general['overrideDimension2Color'].solid.color;
+                           return <string>general['overrideDimension2Color'];
                        }
                     }
                 }
@@ -865,7 +872,8 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['XAxisHighlightColor']) {
-                           return general['XAxisHighlightColor'].solid.color;
+                           //return general['XAxisHighlightColor'].solid.color;
+                           return <string>general['XAxisHighlightColor'];
                        }
                     }
                 }
@@ -880,7 +888,8 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['YAxisHighlightColor']) {
-                           return general['YAxisHighlightColor'].solid.color;
+                           //return general['YAxisHighlightColor'].solid.color;
+                           return <string>general['YAxisHighlightColor'];
                        }
                     }
                 }
@@ -895,7 +904,8 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['borderDimensionColor']) {
-                           return general['borderDimensionColor'].solid.color;
+                           //return general['borderDimensionColor'].solid.color;
+                           return <string>general['borderDimensionColor'];
                        }
                     }
                 }
@@ -910,7 +920,8 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['timelineDimensionColor']) {
-                           return general['timelineDimensionColor'].solid.color;
+                           //return general['timelineDimensionColor'].solid.color;
+                           return <string>general['timelineDimensionColor'];
                        }
                     }
                 }
@@ -925,7 +936,7 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['color' + colorNum + 'Val']) {
-                           return general['color' + colorNum + 'Val'];
+                           return <number>general['color' + colorNum + 'Val'];
                        }
                     }
                 }
@@ -940,7 +951,7 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['color' + colorNum + 'LegendVal']) {
-                           return general['color' + colorNum + 'LegendVal'];
+                           return <number>general['color' + colorNum + 'LegendVal'];
                        }
                     }
                 }
@@ -954,7 +965,7 @@ module powerbi.extensibility.visual {
                 if (objects) {
                     var general = objects['general'];
                     if (general) {
-                        return general['showData'];
+                        return <boolean>general['showData'];
                     }
                 }
             }
@@ -968,7 +979,7 @@ module powerbi.extensibility.visual {
                 if (objects) {
                     var general = objects['general'];
                     if (general) {
-                        return general['showLegend'];
+                        return <boolean>general['showLegend'];
                     }
                 }
             }
@@ -982,7 +993,7 @@ module powerbi.extensibility.visual {
                 if (objects) {
                     var general = objects['general'];
                     if (general) {
-                        return general['showTotals'];
+                        return <boolean>general['showTotals'];
                     }
                 }
             }
@@ -996,7 +1007,7 @@ module powerbi.extensibility.visual {
                 if (objects) {
                     var general = objects['general'];
                     if (general) {
-                        return general['totalXTitle'];
+                        return <string>general['totalXTitle'];
                     }
                 }
             }
@@ -1010,7 +1021,7 @@ module powerbi.extensibility.visual {
                 if (objects) {
                     var general = objects['general'];
                     if (general) {
-                        return general['totalYTitle'];
+                        return <string>general['totalYTitle'];
                     }
                 }
             }
