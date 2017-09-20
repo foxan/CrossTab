@@ -335,31 +335,33 @@ module powerbi.extensibility.visual {
 
        constructor(options: VisualConstructorOptions) {
 
-           debugger;
+           // debugger;
 
-            this.host = options.host;
+           this.host = options.host;
 
-            this.svgSize.height = options.element.clientHeight;
-            this.svgSize.width = options.element.clientWidth;
+           this.svgSize.height = options.element.clientHeight;
+           this.svgSize.width = options.element.clientWidth;
 
-            this.svgDiv = d3.select(options.element)
-                .append('div')
-                .attr("style", "overflow: auto")
-                .attr('class', 'crossTabContainer')
-                .attr("style", 'height:' + this.svgSize.height)
-                .attr("style", 'width:' + this.svgSize.width);
+           this.svgDiv = d3.select(options.element)
+           .append('div')
+           .attr("style", "overflow: auto")
+           .attr('class', 'crossTabContainer')
+           .attr("style", 'height:' + this.svgSize.height)
+           .attr("style", 'width:' + this.svgSize.width);
 
-            this.svg = this.svgDiv
-                .append('svg')
-                .attr("class", "svgCrossTab")
-                .attr("height", this.svgSize.height)
-                .attr("width", this.svgSize.width);
+           this.svg = this.svgDiv
+           .append('svg')
+           .attr("class", "svgCrossTab")
+           .attr("height", this.svgSize.height)
+           .attr("width", this.svgSize.width);
 
-            this.selectionManager = options.host.createSelectionManager();
-        }
+           this.selectionManager = options.host.createSelectionManager();
+       }
 
         public update(options: VisualUpdateOptions): void {
-            debugger;
+
+            // debugger;
+
             if (!options.dataViews || !options.dataViews[0]) return;
             this.svg.selectAll("*").remove();
             this.mainGraphics = this.svg;
@@ -371,7 +373,9 @@ module powerbi.extensibility.visual {
         }
 
         private updateInternal(options: VisualUpdateOptions): void {
-            debugger;
+
+            // debugger;
+
             var dataView = this.dataView = options.dataViews[0];
             var showTotals = this.getShowTotals(options.dataViews[0]);
             var totalXTitle = this.totalXTitle = this.getTotalXTitle(dataView);

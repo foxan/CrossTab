@@ -1,24 +1,25 @@
 {
   "visual": {
     "name": "crossTab",
-    "displayName": "CrossTab",
+    "displayName": "CrossTab by SnagR",
     "guid": "PBI_CV_522F2011_DD5A_44D2_A8ED_456F3931DF77",
     "visualClassName": "CrossTab",
     "version": "1.0.0",
-    "description": "",
-    "supportUrl": "",
-    "gitHubUrl": ""
+    "description": "A colour-coded chart which allows you to display and highlight multiple dimensions of data in a matrix",
+    "supportUrl": "https://www.snagr.co.uk/en/contact/contact-us",
+    "gitHubUrl": "https://github.com/markive/crossTab"
   },
   "apiVersion": "1.6.0",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "SnagR Software Ltd",
+    "email": "mark.henderson@snagr.co.uk"
   },
   "assets": {
     "icon": "assets/icon.png"
   },
   "externalJS": [
-    "node_modules/d3/d3.min.js"
+    "node_modules/d3/d3.min.js",
+    "node_modules/powerbi-visuals-utils-tooltiputils/lib/index.js"
   ],
   "style": "style/visual.less",
   "capabilities": "capabilities.json"
