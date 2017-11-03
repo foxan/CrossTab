@@ -843,8 +843,7 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['overrideDimension1Color']) {
-                           //return general['overrideDimension1Color'].solid.color;
-                           return <string>general['overrideDimension1Color'];
+                           return <string>general['overrideDimension1Color']['solid']['color'];
                        }
                     }
                 }
@@ -859,8 +858,7 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['overrideDimension2Color']) {
-                           //return general['overrideDimension2Color'].solid.color;
-                           return <string>general['overrideDimension2Color'];
+                           return <string>general['overrideDimension2Color']['solid']['color'];
                        }
                     }
                 }
@@ -875,8 +873,7 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['XAxisHighlightColor']) {
-                           //return general['XAxisHighlightColor'].solid.color;
-                           return <string>general['XAxisHighlightColor'];
+                           return <string>general['XAxisHighlightColor']['solid']['color'];
                        }
                     }
                 }
@@ -891,8 +888,7 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['YAxisHighlightColor']) {
-                           //return general['YAxisHighlightColor'].solid.color;
-                           return <string>general['YAxisHighlightColor'];
+                           return <string>general['YAxisHighlightColor']['solid']['color'];
                        }
                     }
                 }
@@ -907,8 +903,7 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['borderDimensionColor']) {
-                           //return general['borderDimensionColor'].solid.color;
-                           return <string>general['borderDimensionColor'];
+                           return <string>general['borderDimensionColor']['solid']['color'];
                        }
                     }
                 }
@@ -923,8 +918,7 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['timelineDimensionColor']) {
-                           //return general['timelineDimensionColor'].solid.color;
-                           return <string>general['timelineDimensionColor'];
+                           return <string>general['timelineDimensionColor']['solid']['color'];
                        }
                     }
                 }
