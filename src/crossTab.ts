@@ -828,8 +828,7 @@ module powerbi.extensibility.visual {
                     var general = objects['general'];
                     if (general) {
                        if (general['totalsColor']) {
-                           //return general['totalsColor'].solid.color;
-                           return <string>general['totalsColor'];
+                           return <string>general['totalsColor']['solid']['color'];
                        }
                     }
                 }
